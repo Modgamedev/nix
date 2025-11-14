@@ -66,9 +66,22 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
+  
   programs.bash.promptInit = ''
-PS1='\n\[\e[38;5;245m\](\[\e[38;5;245m\]\A\[\e[38;5;245m\])\[\e[0m\] \[\e[38;5;40m\]\u\[\e[38;5;45m\]@\h\[\e[0m\] \[\e[38;5;245m\]in\[\e[0m\] \[\e[38;5;220m\]\w\[\e[0m\] \[\e[38;5;46m\]\$\[\e[0m\] '
+  if [ "$TERM" != "dumb" ]; then
+    if [ "$UID" -eq 0 ]; then
+      USER_COLOR="\[\e[38;5;196m\]"
+      SIGN_COLOR="\[\e[38;5;196m\]"
+    else
+      USER_COLOR="\[\e[38;5;40m\]"
+      SIGN_COLOR="\[\e[38;5;46m\]"
+    fi
+
+  PS1='\n\[\e[38;5;245m\](\A)\[\e[0m\] '"${USER_COLOR}"'\u\[\e[38;5;45m\]@\h\[\e[0m\] \[\e[38;5;245m\]in\[\e[0m\] \[\e[38;5;220m\]\w\[\e[0m\] '"${SIGN_COLOR}"'\$\[\e[0m\] '
+  fi
   '';
+
+
   # Users
   users.users.mod = {
   isNormalUser = true;
