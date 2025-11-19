@@ -7,5 +7,5 @@
     allowedTCPPorts = [ 58585 ];      # Открытые TCP порты
     allowedUDPPorts = [  ];           # Открытые UDP порты
     allowPing = false;                # Отключаем пинги
-  }
+  };
 }
