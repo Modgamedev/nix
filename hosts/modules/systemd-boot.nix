@@ -2,9 +2,26 @@
 
 {
   boot = {
-    consoleLogLevel = 0;                  # Выводить в консоль при загрузке только критичные сообщения
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
+    plymouth = {
+      enable = true;
+      theme = "rings";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];
+        })
+      ];
+    };
     loader = {
-      timeout = 3;                        # Длительность показа консоли
+      timeout = 0;                        # Длительность показа консоли
       systemd-boot = {                    # Определяем какой загрузчик
         enable = true;                    # Включаем загрузчик systemd-boot
         editor = false;                   # Отключаем редактирование командной строки ядра перед загрузкой
