@@ -1,0 +1,29 @@
+{ config, pkgs, ... }:
+
+{
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      General = {
+        AddressRandomization = "network";    # Рандомизация MAC для каждой сети
+      };
+      Network = {
+        EnableIPv6 = false;                  # Отключение IPv6
+        NameResolvingService = "systemd";
+      };
+      Rank = {
+        BandModifier6GHz = 3.0;              # Чем выше значение, там больше приоритет для подключения
+        BandModifier5GHz = 2.0;
+        BandModifier2_4GHz = 1.0;
+      };
+      Scan = {
+        DisablePeriodicScan = true;          # Отключаем периодическое сканирование (делаем скан вручную, когда надо)
+        DisableRoamingScan = true;           # Не будет пытаться переключиться на другую сеть у которой сигнал лучше
+      };
+      Settings = {
+        AutoConnect = true;                  # Авто-подключение к известным сетям
+        Hidden = true;                       # Подключение к скрытым сетям
+      };
+    };
+  };
+}
