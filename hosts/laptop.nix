@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./hardware-configuration.nix        # конфиг разделов диска и файловых систем
+    ./modules/hardware-laptop.nix       # конфиг разделов диска и файловых систем
     ./modules/users.nix                 # модуль пользователя
     ./modules/systemd-boot.nix          # модуль загрузчика systemd-boot
     ./modules/tty.nix                   # настройки tty шрифта, приветствия
