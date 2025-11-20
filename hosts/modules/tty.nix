@@ -2,7 +2,8 @@
 
 {
   services.getty = {
-    greetingLine = lib.mkForce "NixOS ${config.system.nixos.release} — \\l";
+    greetingLine = lib.mkForce "NixOS ${config.system.nixos.release} - \l";
+''NixOS ${config.system.nixos.release} - \l'';
     helpLine = lib.mkForce "";
   };
   console = {
