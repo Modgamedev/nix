@@ -11,6 +11,7 @@
     ./modules/foot.nix
     ./modules/git.nix
     ./modules/zsh.nix
+    ./modules/fonts.nix
   ];
 
   home.file.".config/niri/config.kdl".source = ./modules/niri/config.kdl;
