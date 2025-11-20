@@ -2,12 +2,14 @@
 
 {
   imports = [
-    ./modules/hardware-laptop.nix       # конфиг разделов диска и файловых систем
+    ./modules/hardware-laptop.nix       # железо
     ./modules/users.nix                 # модуль пользователя
     ./modules/systemd-boot.nix          # модуль загрузчика systemd-boot
     ./modules/tty.nix                   # настройки tty шрифта, приветствия
     ./modules/network-iwd.nix           # только wi-fi
   ];
+
+  environment.pathsToLink = [ "/share/zsh" ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
