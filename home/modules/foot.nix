@@ -5,6 +5,7 @@
     enable = true;
     settings = {
       main = {
+        font = "Iosevka Term Extended:size=11";
         "dpi-aware" = "yes";
       };
 
