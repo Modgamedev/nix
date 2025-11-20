@@ -13,6 +13,7 @@
     ./modules/zsh.nix
     ./modules/waybar.nix
     ./modules/fonts.nix
+    ./modules/dircolors.nix
   ];
 
   home.file.".config/niri/config.kdl".source = ./modules/niri/config.kdl;
