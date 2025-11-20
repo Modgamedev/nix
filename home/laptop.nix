@@ -10,5 +10,6 @@
     ./modules/firefox.nix
     ./modules/foot.nix
     ./modules/git.nix
+    ./modules/zsh.nix
   ];
 }
