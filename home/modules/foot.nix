@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       main = {
-        font = "Iosevka Term Extended:size=11";
+        font = "IosevkaTerm NFM:weight=Light:size=11";
         "dpi-aware" = "yes";
       };
 
