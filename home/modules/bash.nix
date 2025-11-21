@@ -5,7 +5,7 @@
     enable = true;              # Включено
     enableCompletion = true;    # Автодополнение через TAB
     shellAliases = {
-      ls = "ls --group-directories-first";
+      ls = "ls --group-directories-first --color=auto";
     };
     historyControl = [ 
       "erasedups"               # Удалять все предыдущие дубликаты
