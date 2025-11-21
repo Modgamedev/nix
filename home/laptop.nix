@@ -10,7 +10,7 @@
     ./modules/firefox.nix
     ./modules/foot.nix
     ./modules/git.nix
-    ./modules/zsh.nix
+    ./modules/bash.nix
     ./modules/waybar.nix
     ./modules/fonts.nix
     ./modules/dircolors.nix
