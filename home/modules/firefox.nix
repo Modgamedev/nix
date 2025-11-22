@@ -158,6 +158,19 @@
         "browser.aboutConfig.showWarning" = lock-false;                                         # Не показывать предупреждение в about:config
         "toolkit.legacyUserProfileCustomizations.stylesheets" = lock-true;                      # Для применения кастомного CSS
         "layout.css.prefers-color-scheme.content-override" = { Value = 0; Status = "locked"; }; # Применяем темную тему
+        ##################
+        ###     AI     ###
+        ##################
+        "browser.ml.enable" = lock-false;                        # Глобально отключаем ИИ
+        "browser.ml.chat.menu" = lock-false;                     # Отключаем ИИ в меню ПКМ
+        "browser.tabs.groups.smart.enabled" = lock-false;        # Отключаем ИИ‑подсказки для групп вкладок
+        "browser.ml.linkPreview.enabled" = lock-false;           # Отключаем ИИ-превью ссылок
+        ##################
+        ### Переводчик ###
+        ##################
+        "browser.translations.enable" = lock-true;               # Включаем встроенный переводчик
+        "browser.translations.automaticallyPopup" = lock-false;  # Отключаем всплывающее окно о переводе
+
       };
 
     };
