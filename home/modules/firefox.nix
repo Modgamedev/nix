@@ -124,9 +124,9 @@
       PromptForDownloadLocation = false;     # Отключаем вопросы куда скачать файл
       SearchBar = "unified";                 # Едины URL бар
       SearchEngines = {
-        Default = "ddg";                     # Поисковик по умолчанию Duck Duck GO
+        Default = "DuckDuckGo";              # Поисковик по умолчанию
         PreventInstalls = true;              # Запрещаем установку поисковика с веб-страниц
-        Remove = [ "Google" ];               # Удаляем встроенные поисковики
+        Remove = [ "Google" "Bing" "Perplexity" "Wikipedia (en)" ];        # Удаляем встроенные поисковики
       };
       SearchSuggestEnabled = false;          # Отключаем подсказки поиска
       SkipTermsOfUse = true;                 # Отключаем отображение Условий использования и Уведомлений о конфиденциальности при запуске
@@ -155,7 +155,11 @@
     profiles.xymod = {
       isDefault = true;
       settings = {
-        "sidebar.verticalTabs" = true;
+        "sidebar.verticalTabs" = true;            # Включаем вертикальные вкладки
+        "sidebar.position_start" = true;          # Расположение панели вертикальных вкладок слева
+        "sidebar.visibility" = expand-on-hover;   # Панель вертикальных вкладок скрыта, разворачивается при наведении
+        "sidebar.main.tools" = "";                # Отключаем все значки с панели вертикальных вкладок
+        "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;    # Отключаем подсказку при первом открытии
       };
     };
   };
