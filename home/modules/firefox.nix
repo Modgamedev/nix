@@ -154,12 +154,17 @@
     #########################
     profiles.xymod = {
       isDefault = true;
-      settings = {
-        "sidebar.verticalTabs" = true;              # Включаем вертикальные вкладки
-        "sidebar.position_start" = true;            # Расположение панели вертикальных вкладок слева
-        "sidebar.visibility" = "expand-on-hover";   # Панель вертикальных вкладок скрыта, разворачивается при наведении
-        "sidebar.main.tools" = " ";                 # Отключаем все значки с панели вертикальных вкладок
-        "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;    # Отключаем подсказку при первом открытии
+      settings = {                              # Настройки pref (без блокировки)
+        ##############################
+        ### Боковая панель вкладок ###
+        ##############################
+        "sidebar.verticalTabs" = true;                               # Включаем вертикальные вкладки
+        "sidebar.position_start" = true;                             # Расположение панели вертикальных вкладок слева
+        "sidebar.visibility" = "expand-on-hover";                    # Панель вертикальных вкладок скрыта, разворачивается при наведении
+        "sidebar.main.tools" = " ";                                  # Отключаем все значки с панели вертикальных вкладок
+        "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;      # Отключаем подсказку при первом открытии
+        "sidebar.animation.expand-on-hover.delay-duration-ms" = 0;   # Задержка для раскрытия при наведении
+        "sidebar.animation.expand-on-hover.duration-ms" = 180;       # Скорость раскрытия/скрытия
       };
     };
   };
