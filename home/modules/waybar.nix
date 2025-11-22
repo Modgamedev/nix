@@ -18,7 +18,29 @@
     	border-top: none;
     	border-radius: 0 0 35px 35px;  /* верх-лево | верх-право | низ-право | низ-лево */
 	  }
+	  /* Модули верхнего бара */
+	  window#waybar.top .modules-left {
+        padding-left: 20px;
+	  }
+	  window#waybar.top .modules-right {
+        padding-right: 20px;
+	  }
+	  /* Цвета состояний */
+	  #cpu.medium,
+	  #battery.medium,
+	  #network.disconnected,
+	  #memory.medium { color: yellow; }
+
+	  #cpu.high,
+	  #memory.high { color: blue; }
+
+	  #cpu.critical,
+	  #battery.critical,
+	  #temperature.critical,
+	  #network.disabled,
+	  #memory.critical { color: #ff3b2f; }
 	'';
+
     settings = {
       mainBar = {
         position = "top";
