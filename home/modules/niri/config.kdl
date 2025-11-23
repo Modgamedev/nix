@@ -2,7 +2,8 @@
 //     Секция: Настройки ввода     //
 //---------------------------------//
 input {
-
+  //-------- Общие настройки ------//
+  warp-mouse-to-focus                         // Перемещать курсор в центр активного окна при переходе
   //---------- Клавиатура ---------//
   keyboard {
     xkb {
@@ -10,7 +11,6 @@ input {
       options "grp:caps_toggle,ctrl:nocaps"   // Как переключать (CapsLock)
     }
   }
-
   //------------ Тачпад -----------//
   touchpad {
     tap                                       // Тап по поверхности тачпада как левый клик мыши
@@ -22,7 +22,6 @@ input {
     scroll-method "two-finger"                // Скролл двумя пальцами
     disabled-on-external-mouse                // Если подключена внешняя мышь, тачпад отключается автоматически.
   }
-
   //------------- Мышка -----------//
   mouse {
     // natural-scroll                         // Поведение скролла (для мыши обычно выключено)
@@ -30,7 +29,6 @@ input {
     // accel-profile "flat"                   // Режим ускорения (flat, adaptive)
     // scroll-method "no-scroll"              // Способ скролла (выключено, так как колесико)
   }
-  warp-mouse-to-focus                         // Перемещать курсор в центр активного окна при переходе
 }
 
 //---------------------------------//
@@ -46,12 +44,10 @@ output "eDP-1" {                              // Инфо о мониторе к
 //         Секция: Вид окон        //
 //---------------------------------//
 layout {
-
   //------- Обшие настройки -------//
   gaps 20                                      // Отступы вокруг окон, в логических пикселях
   center-focused-column "never"                // Никогда не центрировать окна при переключении
   default-column-width { proportion 0.5; }     // Стандартная ширину новых окон, когда они открываются
-
   //---- Внешние отступы окон ----//
   struts {
     left -15                                    // Отступы слева
@@ -59,113 +55,99 @@ layout {
     top -15                                     // Отступы сверху
     bottom -15                                  // Отступы снизу
   }
-
   //----- Пресеты ширины окон -----//
   preset-column-widths {                       // Когда меняешь размер MOD + R
     proportion 0.5                             // Половина экрана
     proportion 1.0                             // Полный экран
   }
-
-    // Настройки рамки в фокусе 
-    focus-ring {
-        // off                    // Выключить
-        width 4                   // Ширина в логических пикселях
-        active-color "#7fc8ff"    // Цвет активного окна (CSS, RGB, CSS-like notation)
-
-        // Color of the ring on inactive monitors.
-        //
-        // The focus ring only draws around the active window, so the only place
-        // where you can see its inactive-color is on other monitors.
-        inactive-color "#505050"
-
-
-        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45   // Градиент вместо сплошного цвета рамки
-
-        // You can also color the gradient relative to the entire view
-        // of the workspace, rather than relative to just the window itself.
-        // To do that, set relative-to="workspace-view".
-        //
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"   // Градиент вместо сплошного цвета рамки
-    }
-
-    // Это как рамка фокусировки, но видна всегда у всех окон и меняет цвет у активного. При включении выключить focus ring.
-    border {
-        off                          // Выключить
-        width 2                      // Ширина рамки
-        active-color "#ffc87f"       // Цвет рамки активного окна
-        inactive-color "#505050"     // Цвет рамки неактивного окна
-
-        // Color of the border around windows that request your attention.
-        urgent-color "#9b0000"
-
-        // Gradients can use a few different interpolation color spaces.
-        // For example, this is a pastel rainbow gradient via in="oklch longer hue".
-        //
-        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
-
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
+  //---- Рамки активного окна ----//
+  focus-ring {
+    width 1                                    // Ширина рамки
+    active-color "#7fc8ff"                     // Цвет рамки для активного окна
+    inactive-color "#505050"                   // Цвет рамки для неактивногых окон
+  }
 }
 
-// Настройки запуска исполняемых файлов. 
-// Поддерживает xdg-desktop-autostart (waybar через него лучше настроить)
-spawn-at-startup "waybar"
-
-// Настройки запуска команд через shell (можно использовать сложные команды, скрипты, переменные, пайпы).
-// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
-
-// Демон событий для Waybar
-spawn-sh-at-startup "~/.config/waybar/scripts/niri-event-handler.sh"
-
+//---------------------------------//
+//     Секция: Общие настройки     //
+//---------------------------------//
+prefer-no-csd                                                     // Не использовать CSD приложениями, если возможно
 hotkey-overlay {
-    skip-at-startup  // Отключить всплывающее окно с горячими клавишами при старте
+  skip-at-startup                                                 // Отключить всплывающее окно с биндами при старте
+}
+screenshot-path "~/Pictures/Screenshots/Screenshot %d.%m.%Y.png"  // Директория для скриншотов и формат записи
+
+//---------------------------------//
+//        Секция: Автозапуск       //
+//---------------------------------//
+spawn-at-startup "waybar"                        // Запускаем статус бар
+
+//---------------------------------//
+//         Секция: Жесты           //
+//---------------------------------//
+gestures {
+  //----- Перетаскивание окна между столами ------//
+  dnd-edge-view-scroll {
+    trigger-width 30                             // Расстояние от края для перехода
+    delay-ms 100                                 // Задержка до перехода
+    max-speed 1500                               // Скорость перехода
+  }
+  //-- Перетаскивание окна между пространствами --//
+  dnd-edge-workspace-switch {
+    trigger-height 50                            // Расстояние от края для перехода
+    delay-ms 100                                 // Задержка до перехода
+    max-speed 1500                               // Скорость перехода
+  }
+  //----------------- Триггеры углы --------------//
+  hot-corners {
+    off                                          // Выключаем триггеры в углах
+  }
 }
 
-// niri попросит приложения не использовать CSD, если это возможно.
-prefer-no-csd
-
-// Настройки скриншотов
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"  // Путь
-// screenshot-path null      // Если null, то не будут сохраняться на диск (но могут в буфер)
-
-// Настройки анимаций
+//---------------------------------//
+//         Секция: Анимации        //
+//---------------------------------//
 animations {
-    off                // Отключить анимации
-    // slowdown 3.0    // Замедлить анимации в 3 раза (значение <1 — ускорение)
+  window-open {                                                  //----------- Открытие окна ------------//
+    duration-ms 150
+    curve "ease-out-expo"
+  }
+  window-close {                                                 //----------- Закрытие окна ------------//
+    duration-ms 150
+    curve "ease-out-quad"
+  }
+  overview-open-close {                                          //----- Открытие/закрытие overview -----//
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+  }
+  horizontal-view-movement {                                     //----- Перемещение между окнами -------//
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+  }
+  workspace-switch {                                             //-- Перемещение между пространствами --//
+    spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+  }
+  window-movement {                                              //---------- Перемещение окна ----------//
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+  }
+  window-resize {                                                //------- Изменение размера окна --------//
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+  }
 }
 
-// Настройки для определенного окна (пример)
-/-window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#   // К какому окну применить правила
-    default-column-width {}                        // Какие правила к нему применить
+//----------------------------------------//
+// Секция: Правила для определенных окон  //
+//----------------------------------------//
+window-rule {
+  geometry-corner-radius 10                                    // Радиус скругления углов
+  clip-to-geometry true                                        // Включить или отключить для самого окна (не рамки)
 }
-
-// Настройки для определенного окна (пример)
-/-window-rule {
+window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"    // Применить к Firefox с заголовком Picture-in-Picture
     open-floating true                                         // Открыть его в плавающем режиме
-}
-
-// Настройки для определенного окна (пример). Запретить скриншот окон.
-    /-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#       // Применяется к окну KeePassXC
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#      // GNOME Secrets
-
-    block-out-from "screen-capture"                     // Запрещает niri показывать эти окна в скриншотах
-    // block-out-from "screencast"                      // Блокировать при записи, может в отдельное правило надо.
-}
-
-// Настройки правил для всех окон
-window-rule {
-    geometry-corner-radius 12      // Радиус скругления углов
-    clip-to-geometry true          // Включить или отключить для самого окна (не рамки)
 }
 
 //---------------------------------//
 //           Секция: Бинды         //
 //---------------------------------//
-// Настройки биндов клавиш
-// Формат: клавиши через плюс { действие; }
 // Mod — это Super (Win) или Alt, в зависимости от режима
 // Названия клавиш можно узнать через утилиту wev.
 // То что забиндено можно запустить и командой (niri msg action spawn foot)
