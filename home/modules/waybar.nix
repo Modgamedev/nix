@@ -85,7 +85,7 @@
 		# Диск
     	"disk" = {
 		  interval = 60;
-		  format = "<span font='26'>󰋊</span> {specific_used:.0f}GB";
+		  format = "󰋊 {specific_used:.0f}GB";
 		  format-alt = "󰋊 {percentage_used}%";
 		  unit = "GB";
 		  tooltip = true;
@@ -95,9 +95,9 @@
     	"battery" = {
 		  interval = 60;
 		  design-capacity = false;                      # Использовать текущую ёмкость, не проектную
-		  format = "<span font='26'>{icon}</span> {capacity}%";		   # Отображение: заряд в % и иконка
-		  format-alt = "<span font='26'>{icon}</span> {power}W";
-		  format-charging = "<span font='26'>󰂄</span> {capacity}%";
+		  format = "{icon} {capacity}%";		   # Отображение: заряд в % и иконка
+		  format-alt = "{icon} {power}W";
+		  format-charging = "󰂄 {capacity}%";
 		  states = {
 	    	medium = 50;
 	    	critical = 20;
