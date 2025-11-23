@@ -58,7 +58,12 @@ layout {
     bottom -14                                  // Отступы снизу
   }
   //----- Пресеты ширины окон -----//
-  preset-column-widths {                       // Когда меняешь размер MOD + R
+  preset-column-widths {                       // Когда меняешь размер MOD+R
+    proportion 0.5                             // Половина экрана
+    proportion 1.0                             // Полный экран
+  }
+  //----- Пресеты высоты окон -----//
+  preset-window-heights {                      // Когда меняешь размер MOD+Ctrl+R
     proportion 0.5                             // Половина экрана
     proportion 1.0                             // Полный экран
   }
