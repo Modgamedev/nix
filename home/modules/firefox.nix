@@ -175,6 +175,7 @@
         ####################################
         "browser.translations.enable" = lock-true;                   # Включаем встроенный переводчик
         "browser.translations.automaticallyPopup" = lock-false;      # Отключаем всплывающее окно о переводе
+        "browser.translations.mostRecentTargetLanguages" = {value = "ru"; Status = "locked"};
         ####################################
         ### Подсказки в поисковой строке ###
         ####################################
