@@ -3,6 +3,12 @@
 {
   services.swayidle = {
     enable = true;
+    events = [
+      {
+      event = "timeout 60";
+      command = "${pkgs.swaylock}/bin/swaylock -f";
+      }
+    ];
   };
 
   programs.swaylock = {
