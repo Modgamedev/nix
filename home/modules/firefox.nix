@@ -161,6 +161,7 @@
         "browser.uidensity" = { Value = 1; Status = "locked"; };                                # Плотность содержимого верхней панели
         "browser.tabs.closeWindowWithLastTab" = lock-false;                                     # Не закрывать окно при закрытии последней вкладки
         "browser.tabs.insertAfterCurrent" = lock-true;                                          # Открывать новую вкладку сразу после текущей
+        "extensions.unifiedExtensions.button.always_visible" = lock-false;                      # Отключаем иконку расширения в панели инструментов
 
 
         ##################
@@ -175,7 +176,7 @@
         ####################################
         "browser.translations.enable" = lock-true;                   # Включаем встроенный переводчик
         "browser.translations.automaticallyPopup" = lock-false;      # Отключаем всплывающее окно о переводе
-        "browser.translations.mostRecentTargetLanguages" = {value = "ru"; Status = "locked"};
+        "browser.translations.mostRecentTargetLanguages" = {value = "ru"; Status = "locked"};     # TODO: сделать чтобы сразу на русский был настроен перевод
         ####################################
         ### Подсказки в поисковой строке ###
         ####################################
@@ -216,6 +217,15 @@
         "general.smoothScroll.msdPhysics.slowdownSpringConstant" = { Value = 250; Status = "locked"; };      # Как быстро прокрутка замедляется
         "general.smoothScroll.currentVelocityWeighting" = { Value = 1; Status = "locked"; };                 # Влияние инерции
         "general.smoothScroll.stopDecelerationWeighting" = { Value = 1; Status = "locked"; };                # Больше = медленнее и плавнее останавливается
+        ####################################
+        ###           Прочее             ###
+        ####################################
+        "accessibility.force_disabled" = { Value = 1; Status = "locked"; };                                  # Запрещаем службы поддержки доступности
+        "app.update.checkInstallTime" = lock-false;                                                          # Отключаем подсчет дней после обновления
+        "browser.backup.enabled" = lock-false;                                                               # Отключаем создание резервной копии профиля
+        
+
+
       };
 
     };
@@ -241,7 +251,14 @@
         ##############################
         "apz.overscroll.enabled" = false;                            # Отключаем эффект "overscroll"
         "mousewheel.default.delta_multiplier_y" = "300";             # Yасколько “большие шаги” прокрутки скролла
-      };
+        ##############################
+        ###        Прочее          ###
+        ##############################
+        "devtools.accessibility.enabled" = false;                    # Запрещаем службы поддержки доступности
+        "app.normandy.enabled" = false;                              # Отключаем опросы и сбор данных
+        "services.sync.prefs.sync.browser.discovery.enabled" = false;                                                                   # Отключаем сервис 
+        "services.sync.prefs.sync.browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;                            # Отключаем сервис
+        "services.sync.prefs.sync.browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;                          # Отключаем сервис
     };
   };
 }
