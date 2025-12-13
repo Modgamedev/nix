@@ -180,7 +180,7 @@
         ####################################
         "browser.translations.enable" = lock-true;                   # Включаем встроенный переводчик
         "browser.translations.automaticallyPopup" = lock-false;      # Отключаем всплывающее окно о переводе
-        "browser.translations.mostRecentTargetLanguages" = {value = "ru"; Status = "locked"};     # TODO: сделать чтобы сразу на русский был настроен перевод
+        #"browser.translations.mostRecentTargetLanguages" = {value = "ru"; Status = "locked"};     # TODO: сделать чтобы сразу на русский был настроен перевод
         ####################################
         ### Подсказки в поисковой строке ###
         ####################################
@@ -230,12 +230,11 @@
         "media.webvtt.testing.events" = lock-false;                                                          # Отключаем телеметрию
         "network.traffic_analyzer.enabled" = lock-false;                                                     # Отключаем телеметрию
         "network.trr.confirmation_telemetry_enabled" = lock-false;                                           # Отключаем телеметрию
-        "" = lock-false;                                                          # Отключаем телеметрию
-        "" = lock-false;                                                          # Отключаем телеметрию
-        "" = lock-false;                                                          # Отключаем телеметрию
-        "" = lock-false;                                                          # Отключаем телеметрию
-        "" = lock-false;                                                          # Отключаем телеметрию
-
+        #"" = lock-false;                                                          # Отключаем телеметрию
+        #"" = lock-false;                                                          # Отключаем телеметрию
+        #"" = lock-false;                                                          # Отключаем телеметрию
+        #"" = lock-false;                                                          # Отключаем телеметрию
+        #"" = lock-false;                                                          # Отключаем телеметрию
         ####################################
         ###           Прочее             ###
         ####################################
@@ -257,12 +256,7 @@
         "network.notify.changed" = lock-false;                                                               # Отключаем проверку каждые 5 сек об изменении сетевого подключения компьютера
         "network.prefetch-next" = lock-false;                                                                # Отключаем предварительную загрузку ссылок на сайте
         "network.wifi.scanning_period" = { Value = 0; Status = "locked"; };                                  # Отключаем сканирование wi-fi
-
-        
-
-
       };
-
     };
 
     #########################
@@ -296,7 +290,7 @@
         "services.sync.prefs.sync.browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;        # Отключаем сервис
         "memory.phc.enabled" = false;                                                                                 # Отключаем телеметрию об ошибках в работе памяти
         "narrate.enabled" = false;                                                                                    # Отключаем зачитывание текста синтезированной речью в режиме чтения
-
+      };
     };
   };
 }
