@@ -52,6 +52,7 @@
           installation_mode = "force_installed";               # Устанавливаем автоматически и блокируем удаление
           private_browsing = true;                             # Включаем для приватного браузера
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+		  default_area = "menupanel";
         };
       };
       FirefoxHome = {                        # Настройки стартовой страницы
