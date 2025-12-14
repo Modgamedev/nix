@@ -300,6 +300,7 @@
 	    #sidebar-button,                    /* Кнопка раскрытия боковой панели с вкладками */
 	    #alltabs-button,                    /* Кнопка показа всех вкладок                  */
 	    #firefox-view-button,               /* Кнопка firefox-view                         */
+	    #tabs-newtab-button,                /* Кнопка открыть новую вкладку                */
         #back-button,                       /* Кнопка назад                                */
         #forward-button {                   /* Кнопка вперед                               */
           display: none !important;
