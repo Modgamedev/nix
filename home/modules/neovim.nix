@@ -7,15 +7,18 @@
     #######################
     enable = true;
     defaultEditor = true;
-
     #######################
     ###     Плагины     ###
     #######################
     plugins = with pkgs.vimPlugins; [
-      nvim-tree-lua
-      lualine-nvim
+      nvim-tree-lua                       ## Файловый менеджер (дерево файлов сбоку)
+      lualine-nvim                        ## Строка статуса внизу
+      indent-blankline-nvim               ## Вертикальные линии отступов (структура кода)
+      oil-nvim                            ## Файловый менеджер (как буферы)
+      bufferline-nvim                     ## Вкладки буферов сверху
+      tokyonight-nvim                     ## Цветовая тема (UI + синтаксис)
+      nvim-scrollbar
     ];
-
     #######################
     ###   LUA конфиг    ###
     #######################
@@ -23,19 +26,150 @@
       -----------------------------
       --     Общие настройки     --
       -----------------------------
-      vim.opt.number = true              -- абсолютный номер текущей строки
-      vim.opt.relativenumber = true      -- нумерация строк относительно текущей строки 
-     
+      vim.opt.number = true              -- Показывать абсолютный номер текущей строки
+      vim.opt.relativenumber = true      -- Нумерация остальных строк - относительно текущей строки 
+      vim.opt.cursorline = true          -- Выделять текущую строку на которой курсор
+      vim.opt.termguicolors = true       -- Включаем поддержку 24-битных цветов
+      vim.opt.langmap = "йцукенгшщзфывапролдячсмить;qwertyuiopasdfghjklzxcvbnm"
+      vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,a:blinkon400-blinkoff250"
+
+      -- отступы
+      vim.opt.expandtab = true       -- пробелы, а не табы
+      vim.opt.tabstop = 2            -- Tab равен 2 пробелам
+      vim.opt.shiftwidth = 2         -- отступ уровней 2 пробела
+      vim.opt.softtabstop = 2        -- Tab в Insert вводит 2 пробела
+      vim.opt.autoindent = true      -- новая строка получает такой же отступ, как предыдущая
+      vim.opt.smartindent = true     -- Neovim сам увеличивает отступ после {, if, for и т.п.
+
+      -- бинды
+      vim.g.mapleader = " "                                                                  -- ЛИДЕР - пробел
+      vim.keymap.set("n", "<leader>w", ":bdelete<CR>", { desc = "Close current buffer" })    -- Закрыть буфер
+      vim.keymap.set("n", "<leader>l", ":bnext<CR>", { desc = "Next buffer" })               -- Следующий буфер (вправо)
+      vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { desc = "Previous buffer" })       -- Предыдущий буфер (влево)
+
+      vim.keymap.set("n", "-", function()
+        local parent = vim.fn.expand("%:p:h")  -- путь к родительской папке текущего файла
+        require("oil").open_float(parent)       -- открываем float
+      end, { desc = "Open parent directory in floating Oil" })
+
+      for i = 1, 9 do
+        vim.keymap.set(
+          "n",
+          "<leader>" .. i,
+          "<cmd>BufferLineGoToBuffer " .. i .. "<CR>",
+          { desc = "Go to buffer " .. i }
+        )
+      end
+
+      -----------------------------
+      --        THEME            --
+      -----------------------------
+      require("tokyonight").setup({
+        style = "night",                    -- Выбрал его как самый контрастный и темный
+        transparent = false,                -- Фон не прозрачный
+        terminal_colors = true,
+        styles = {
+          comments = { italic = true },
+          keywords = { italic = true },
+          functions = {},
+          variables = {},
+        },
+      })
+
+      vim.cmd.colorscheme("tokyonight")
+
+      require("scrollbar").setup({
+        hide_if_all_visible = false,
+      })
+
       -----------------------------
       --        nvim-tree        --
       -----------------------------
       require("nvim-tree").setup {}
-     
+      
       -----------------------------
-      --        lualine        --
+      --           oil           --
       -----------------------------
-      require("lualine").setup {}
-    '';
+      require("oil").setup({
+        ----- Общие настройки ------
+        default_file_explorer = true,                        -- Oil открывается при 'nvim .' или :e папка
+        delete_to_trash = false,                             -- Удаление сразу полностью, без корзины
+        skip_confirm_for_simple_edits = true,                -- Не показывать подтверждающие окна для простых операций
+        ----- Что показывать слева от директории/файла -----
+        columns = {                    
+          "permissions",                                     -- Права доступа
+          "size",                                            -- Размер
+          "icon",                                            -- Иконка
+        },
+      })
 
+      ----------------------------------------------------------
+      --        lualine          --    Строка статуса снизу   --
+      ----------------------------------------------------------
+      require("lualine").setup {
+        ----- Общие настройки -----
+        options = {
+          globalstatus = true,                                 -- Единая строка статуса внизу 
+          theme = "auto",                                      -- Тема
+        },
+        ------ Секции ----- 
+        sections = {
+          lualine_a = { "mode" },                              -- Режим NORMAL/INSERT/…
+          lualine_b = { "filename" },                          -- Имя файла
+          lualine_c = { "branch" },                            -- Ветка git
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {},
+        },
+      }
+
+      -----------------------------------------------------------
+      --        bufferline       --    Вкладки буферов сверху  --
+      -----------------------------------------------------------
+      require("bufferline").setup {
+        ----- Общие настройки -----
+        options = {
+          mode = "buffers",                                    -- Показывать буферы как вкладки
+          separator_style = "slope",
+          color_icons = true,                                  -- Показывать цветные иконки
+          show_buffer_icons = true,                            -- Показывать иконки файлов в вкладке
+          show_buffer_close_icons = false,                     -- Не показывать иконку закрытия (крестик)
+          move_wraps_at_ends = true,                           -- Зацикленный переход между вкладками
+          always_show_bufferline = false,                      -- Если буфер один, строка вкладок не показывается
+          numbers = "ordinal",                                 -- Показывать порядковые номера вкладок
+          indicator = {
+            style = 'underline',                               -- Подсветка активного буфера/вкладки снизу
+          },
+        },
+      }
+
+      -----------------------------
+      --    indent-blankline     --
+      -----------------------------
+      local hooks = require("ibl.hooks")
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, "RainbowRed",     { fg = "#E06C75" })
+        vim.api.nvim_set_hl(0, "RainbowYellow",  { fg = "#E5C07B" })
+        vim.api.nvim_set_hl(0, "RainbowBlue",    { fg = "#61AFEF" })
+        vim.api.nvim_set_hl(0, "RainbowOrange",  { fg = "#D19A66" })
+        vim.api.nvim_set_hl(0, "RainbowGreen",   { fg = "#98C379" })
+        vim.api.nvim_set_hl(0, "RainbowViolet",  { fg = "#C678DD" })
+        vim.api.nvim_set_hl(0, "RainbowCyan",    { fg = "#56B6C2" })
+      end)
+
+      require("ibl").setup {
+        indent = {
+          highlight = {
+            "RainbowRed",
+            "RainbowYellow",
+            "RainbowGreen",
+            "RainbowBlue",
+            "RainbowOrange",
+            "RainbowViolet",
+            "RainbowCyan",
+          },
+	      },
+      }
+    '';
   };
 }
