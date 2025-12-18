@@ -15,6 +15,7 @@
     ./modules/fonts.nix
     ./modules/dircolors.nix
     ./modules/udiskie.nix
+    ./modules/mako.nix
     #./modules/swaylock.nix
     #./modules/pointerCursor.nix
   ];
