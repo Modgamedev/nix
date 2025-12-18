@@ -11,7 +11,7 @@
     ./modules/foot.nix
     ./modules/git.nix
     ./modules/bash.nix
-    ./modules/waybar.nix
+    ./modules/waybar/waybar.nix
     ./modules/fonts.nix
     ./modules/dircolors.nix
     #./modules/swaylock.nix
