@@ -16,4 +16,5 @@
   networking.hostName = "nixos-laptop";
   system.stateVersion = "25.05";
   time.timeZone = "UTC";
+  services.udisks2.enable = true;
 }
