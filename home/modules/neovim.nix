@@ -11,13 +11,13 @@
     ###     Плагины     ###
     #######################
     plugins = with pkgs.vimPlugins; [
-      nvim-tree-lua                       ## Файловый менеджер (дерево файлов сбоку)
       lualine-nvim                        ## Строка статуса внизу
       indent-blankline-nvim               ## Вертикальные линии отступов (структура кода)
       oil-nvim                            ## Файловый менеджер (как буферы)
       bufferline-nvim                     ## Вкладки буферов сверху
       tokyonight-nvim                     ## Цветовая тема (UI + синтаксис)
       nvim-scrollbar
+      gitsigns-nvim
     ];
     #######################
     ###   LUA конфиг    ###
@@ -78,24 +78,27 @@
 
       vim.cmd.colorscheme("tokyonight")
 
+      -----------------------------
+      --       scrollbar         --
+      -----------------------------
       require("scrollbar").setup({
         hide_if_all_visible = false,
       })
 
       -----------------------------
-      --        nvim-tree        --
+      --       gitsigns          --
       -----------------------------
-      require("nvim-tree").setup {}
-      
+      require("gitsigns").setup({})
+
       -----------------------------
       --           oil           --
       -----------------------------
       require("oil").setup({
-        ----- Общие настройки ------
+        -- Общие настройки
         default_file_explorer = true,                        -- Oil открывается при 'nvim .' или :e папка
         delete_to_trash = false,                             -- Удаление сразу полностью, без корзины
         skip_confirm_for_simple_edits = true,                -- Не показывать подтверждающие окна для простых операций
-        ----- Что показывать слева от директории/файла -----
+        -- Что показывать слева от директории/файла
         columns = {                    
           "permissions",                                     -- Права доступа
           "size",                                            -- Размер
@@ -107,12 +110,10 @@
       --        lualine          --    Строка статуса снизу   --
       ----------------------------------------------------------
       require("lualine").setup {
-        ----- Общие настройки -----
         options = {
           globalstatus = true,                                 -- Единая строка статуса внизу 
           theme = "auto",                                      -- Тема
         },
-        ------ Секции ----- 
         sections = {
           lualine_a = { "mode" },                              -- Режим NORMAL/INSERT/…
           lualine_b = { "filename" },                          -- Имя файла
@@ -127,7 +128,6 @@
       --        bufferline       --    Вкладки буферов сверху  --
       -----------------------------------------------------------
       require("bufferline").setup {
-        ----- Общие настройки -----
         options = {
           mode = "buffers",                                    -- Показывать буферы как вкладки
           separator_style = "slope",
@@ -138,7 +138,7 @@
           always_show_bufferline = false,                      -- Если буфер один, строка вкладок не показывается
           numbers = "ordinal",                                 -- Показывать порядковые номера вкладок
           indicator = {
-            style = 'underline',                               -- Подсветка активного буфера/вкладки снизу
+            style = 'underline',                               -- Подсветка активного буфера снизу
           },
         },
       }
