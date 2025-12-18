@@ -12,8 +12,12 @@
 		spacing = 10;
 
         modules-left = [ "cpu" "memory" "temperature" "disk" "battery" "network" ];
-        modules-center = [ "custom/active-windows" ];
+        modules-center = [ "niri/window" ];
         modules-right = [ "niri/language" ];
+
+		"niri/window" = {
+			format = "{icon}"
+		};
 
         "cpu" = {
 	      interval = 10;
