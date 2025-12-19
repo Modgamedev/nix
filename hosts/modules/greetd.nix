@@ -13,7 +13,7 @@
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
           --time \
           --asterisks \
-          --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' \
+          --theme 'border=blue;text=white;prompt=green;time=magenta;action=cyan;button=yellow;container=black;input=red' \
           --cmd niri-session
         '';
       };
