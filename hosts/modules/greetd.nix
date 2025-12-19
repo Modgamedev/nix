@@ -11,10 +11,10 @@
         user = "mod";
         command = ''
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
-          --time \
-          --asterisks \
+          --time \                                         # Показывать время
+          --asterisks \                                    # Показывать звездочки при вводе пароля
+          --cmd niri-session                               # Команда, которая запускается после логина
           --theme 'border=blue;text=white;prompt=green;time=magenta;action=cyan;button=yellow;container=black;input=red' \
-          --cmd niri-session
         '';
       };
     };
