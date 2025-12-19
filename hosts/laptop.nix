@@ -10,7 +10,7 @@
     ./modules/systemd-boot.nix          # UEFI загрузчик systemd-boot
     ./modules/tty.nix                   # TTY: шрифт, приветствие, автологин
     ./modules/network-iwd.nix           # Wi-Fi
-    ./modules/greetd.nix
+    ./modules/greetd.nix                #
   ];
 
   #######################
