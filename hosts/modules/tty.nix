@@ -1,15 +1,17 @@
 { config, lib, ... }:
 
 {
-  #services.getty = {
-  #  greetingLine = lib.mkForce "NixOS ${config.system.nixos.release} - \l";    # Выводим сообщение о канале NixOS и номере tty
-  #  helpLine = lib.mkForce "";                                                 # Убираем helpline
-  #};
-
   console = {
+    #######################
+    ### Общие настройки ###
+    #######################
     enable = true;         # Включаем console (TTY)
     earlySetup = true;     # Включаем раннюю настройку консоли в initrd
     keyMap = "us";         # Раскладка клавиатуры
+
+    ########################
+    ### Цветовая палитра ### 
+    ########################
     colors = [
       "1a1b26"             # 0 - Black (фон)
       "f7768e"             # 1 - Red
@@ -29,4 +31,12 @@
       "c0caf5"             # 15 - Bright White
     ];
   };
+
+  #######################
+  ###  Логин по TTY   ### 
+  #######################
+  #services.getty = {
+  #  greetingLine = lib.mkForce "NixOS ${config.system.nixos.release} - \l";    # Выводим сообщение о канале NixOS и номере tty
+  #  helpLine = lib.mkForce "";                                                 # Убираем helpline
+  #};
 }
