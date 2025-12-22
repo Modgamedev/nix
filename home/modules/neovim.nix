@@ -74,6 +74,15 @@
       vim.keymap.set({'v', 'i'}, '<C-c>', '"+y', { silent = true, desc = "Copy selection to system clipboard" })
       vim.keymap.set('n', '<C-c>', '"+yy', { silent = true, desc = "Copy current line to system clipboard" })
 
+      -- Переключение в normal mode от бездействия
+      vim.opt.updatetime = 8000                       -- время неактивности в ms
+      vim.api.nvim_create_autocmd("CursorHoldI", { 
+        callback = function()
+          vim.cmd("stopinsert")                       -- команда выйти из Insert Mode
+      end,
+      })
+
+
       -----------------------------
       --        THEME            --
       -----------------------------
