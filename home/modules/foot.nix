@@ -24,8 +24,12 @@
       };
 
       colors = {
-        background = "1a1b26";   # Фон как Tokyonight в nvim
-        foreground = "c0caf5";   # Основной текст как Tokyonight в nvim
+        background = "1a1b26";                       # Фон как Tokyonight в nvim
+        foreground = "c0caf5";                       # Основной текст как Tokyonight в nvim
+      };
+      key-bindings = {
+        clipboard-copy = "Control+c XF86Copy";       # Копировать текст
+        clipboard-paste = "Control+v XF86Paste";     # Вставить текст
       };
     };
   };
