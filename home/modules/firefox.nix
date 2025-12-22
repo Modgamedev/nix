@@ -51,8 +51,14 @@
         "uBlock0@raymondhill.net" = {                          
           installation_mode = "force_installed";               # Устанавливаем автоматически и блокируем удаление
           private_browsing = true;                             # Включаем для приватного браузера
+		      default_area = "menupanel";                          # Иконка в меню, не в тулбар 
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-		  default_area = "menupanel";
+        };
+        "addon@darkreader.org" = {
+          installation_mode = "force_installed";               # Устанавливаем автоматически и блокируем удаление
+          private_browsing = true;                             # Включаем для приватного браузера
+          default_area = "menupanel";                          # Иконка в меню, не в тулбар 
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
         };
       };
       FirefoxHome = {                        # Настройки стартовой страницы
@@ -291,6 +297,7 @@
         "services.sync.prefs.sync.browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;        # Отключаем сервис
         "memory.phc.enabled" = false;                                                                                 # Отключаем телеметрию об ошибках в работе памяти
         "narrate.enabled" = false;                                                                                    # Отключаем зачитывание текста синтезированной речью в режиме чтения
+        "reader.parse-on-load.enabled" = false;                                                                       # Отключаем reader view
       };
       ##############################
       ###        Свой CSS        ###
