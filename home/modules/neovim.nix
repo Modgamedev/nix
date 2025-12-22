@@ -24,6 +24,7 @@
       langmapper-nvim
       nvim-scrollbar
       gitsigns-nvim
+      toggleterm-nvim
     ];
 
     #######################
@@ -148,6 +149,22 @@
           "icon",                                            -- Иконка
         },
       })
+      -----------------------------
+      --        TERMINAL         --
+      -----------------------------
+      require("toggleterm").setup({
+        size = 15,                                          -- Высота терминала
+        open_mapping = [[<leader>t]],                       -- Сочетание клавиш для открытия/закрытия терминала
+        hide_numbers = true,                                -- Скрывать номера строк
+        start_in_insert = true,                             -- Сразу входить в режим ввода
+        insert_mappings = true,                             -- Разрешить хоткеи 
+        persist_size = true,                                -- 
+        direction = "horizontal",                           -- Расположение терминала снизу горизонтальное
+        close_on_exit = true,                               -- Выход при вводе 'exit'
+        shell = vim.o.shell,                                -- Использовать системный shell
+      })
+
+      vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])          -- Выход из terminal mode в normal mode по Esc
 
       ----------------------------------------------------------
       --        lualine          --    Строка статуса снизу   --
