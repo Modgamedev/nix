@@ -34,9 +34,20 @@
       vim.opt.relativenumber = true      -- Нумерация остальных строк - относительно текущей строки 
       vim.opt.cursorline = true          -- Выделять текущую строку на которой курсор
       vim.opt.termguicolors = true       -- Включаем поддержку 24-битных цветов
-	  vim.opt.wrap = false
-      vim.opt.langmap = "йцукенгшщзфывапролдячсмить;qwertyuiopasdfghjklzxcvbnm"
+	    vim.opt.wrap = false
       vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,a:blinkon400-blinkoff250"
+
+      -----------------------------
+      --    Раскладка русская    --
+      -----------------------------
+      vim.opt.langmap = "йцукенгшщзфывапролдячсмитьЖ;qwertyuiopasdfghjklzxcvbnm:"                   -- Использование команд vim независимо от раскладки 
+      vim.api.nvim_create_autocmd("CmdlineEnter", {                                                 -- переключить раскладку на английскую при вводе команды ":"
+        pattern = ":",
+        callback = function()
+          vim.fn.system("niri msg action switch-layout 0")                                          -- переключаем на английскую расскладку через niri msg
+        end,
+      })
+
 
       -- отступы
       vim.opt.expandtab = true       -- пробелы, а не табы
