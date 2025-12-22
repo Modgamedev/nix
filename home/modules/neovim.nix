@@ -67,7 +67,7 @@
       end
       vim.opt.clipboard = "unnamedplus"
       -- Вставка из системного буфера
-      vim.keymap.set('n', '<C-v>', '"+p', { silent = true, desc = "Paste from system clipboard" })
+      vim.keymap.set({'n', 'i'}, '<C-v>', '"+p', { silent = true, desc = "Paste from system clipboard" })
       vim.keymap.set('i', '<C-v>', '<C-r>+', { silent = true, desc = "Paste from system clipboard" })
 
       -- Копирование в системный буфер
