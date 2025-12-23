@@ -52,7 +52,7 @@ require("bufferline").setup {
 }
 
 -----------------------------
---        TERMINAL         --
+--      toggleterm         --
 -----------------------------
 require("toggleterm").setup({
   size = 15,                                          -- Высота терминала
@@ -61,7 +61,7 @@ require("toggleterm").setup({
   start_in_insert = true,                             -- Сразу входить в режим ввода
   insert_mappings = true,                             -- Разрешить хоткеи 
   persist_size = true,                                -- 
-  direction = "horizontal",                           -- Расположение терминала снизу горизонтальное
+  direction = "float",                                -- Терминал как всплывающее окно
   close_on_exit = true,                               -- Выход при вводе 'exit'
   shell = vim.o.shell,                                -- Использовать системный shell
 })
