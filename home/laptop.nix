@@ -17,7 +17,6 @@
     ./modules/udiskie.nix
     ./modules/mako.nix
     #./modules/swaylock.nix
-    #./modules/pointerCursor.nix
   ];
 
   home.file.".config/niri/config.kdl".source = ./modules/niri/config.kdl;
