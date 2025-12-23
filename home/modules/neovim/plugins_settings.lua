@@ -1,3 +1,19 @@
+-----------------------------
+--        THEME            --
+-----------------------------
+require("tokyonight").setup({
+  style = "night",                    -- Выбрал его как самый контрастный и темный
+  transparent = false,                -- Фон не прозрачный
+  terminal_colors = true,
+  styles = {
+    comments = { italic = true },
+    keywords = { italic = true },
+    functions = {},
+    variables = {},
+  },
+})
+
+vim.cmd.colorscheme("tokyonight")
 ----------------------------------------------------------
 --        lualine          --    Строка статуса снизу   --
 ----------------------------------------------------------
@@ -87,22 +103,7 @@ require("langmapper").setup({
   map_all_ctrl = true,
 })
 
------------------------------
---        THEME            --
------------------------------
-require("tokyonight").setup({
-  style = "night",                    -- Выбрал его как самый контрастный и темный
-  transparent = false,                -- Фон не прозрачный
-  terminal_colors = true,
-  styles = {
-    comments = { italic = true },
-    keywords = { italic = true },
-    functions = {},
-    variables = {},
-  },
-})
 
-vim.cmd.colorscheme("tokyonight")
 
 -----------------------------
 --    indent-blankline     --
