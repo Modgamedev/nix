@@ -27,6 +27,17 @@
       toggleterm-nvim
       nvim-colorizer-lua
       nvim-hlslens
+      nvim-autopairs                      ## Автозакрытие кавычек/скобок 
+      modicator-nvim
+      (nvim-treesitter.withPlugins (plugins: [
+        plugins.bash
+        plugins.lua
+        plugins.nix
+        plugins.json
+        plugins.css
+        plugins.html
+        plugins.javascript
+      ]))
     ];
 
     #######################

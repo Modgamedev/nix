@@ -20,7 +20,6 @@ vim.opt.undofile       = true          -- Сохраняет историю undo
 vim.opt.expandtab      = true          -- Таб делает пробелы а не табы
 vim.opt.tabstop        = 2             -- Tab равен 2 пробелам
 vim.opt.shiftwidth     = 2             -- Отступ уровней 2 пробела
-vim.opt.smartindent    = true          -- Neovim сам увеличивает отступ после {, if, for и т.п.
 -----------------------------
 --         Поиск           --
 vim.opt.ignorecase     = true          -- Игнорировать регистр при поиске
