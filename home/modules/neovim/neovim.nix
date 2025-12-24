@@ -28,7 +28,8 @@
       nvim-colorizer-lua
       nvim-hlslens
       nvim-autopairs                      ## Автозакрытие кавычек/скобок 
-      modicator-nvim
+      smear-cursor-nvim                   ## Анимация курсора
+      modicator-nvim                      ## Цвет номера текущей строки от режима
       (nvim-treesitter.withPlugins (plugins: [
         plugins.bash
         plugins.lua
