@@ -24,7 +24,6 @@
       langmapper-nvim
       nvim-scrollbar
       gitsigns-nvim
-      toggleterm-nvim
       nvim-colorizer-lua
       nvim-hlslens
       nvim-autopairs                      ## Автозакрытие кавычек/скобок 
@@ -47,6 +46,7 @@
     extraLuaConfig = ''
       ${builtins.readFile ./bindings.lua}
       ${builtins.readFile ./settings.lua}
+      ${builtins.readFile ./terminal.lua}
       ${builtins.readFile ./plugins_settings.lua}
     '';
   };
