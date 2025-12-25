@@ -1,4 +1,3 @@
-
 -- глобальная переменная для терминального буфера
 _G.float_term_bufnr = nil
 
@@ -51,6 +50,13 @@ function _G.toggle_floating_term()
     float_term_bufnr, "t", "<Esc>",
     [[<C-\><C-n>:close<CR>]],
     { noremap = true, silent = true }
+  )
+  -- leader+t в терминале = закрыть окно (toggle)
+  vim.keymap.set(
+    "t",
+    "<leader>t",
+    [[<C-\><C-n>:close<CR>]],
+    { buffer = float_term_bufnr, silent = true }
   )
 end
 

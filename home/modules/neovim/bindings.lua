@@ -1,27 +1,64 @@
--- бинды
-vim.g.mapleader = " "                                                                  -- ЛИДЕР - пробел
-vim.keymap.set("n", "<leader>w", ":bdelete<CR>", { desc = "Close current buffer" })    -- Закрыть буфер
-vim.keymap.set("n", "<leader>l", ":bnext<CR>", { desc = "Next buffer" })               -- Следующий буфер (вправо)
-vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { desc = "Previous buffer" })       -- Предыдущий буфер (влево)
+------------------------------------------------------------
+-- Leader key
+------------------------------------------------------------
+vim.g.mapleader = " "    -- Лидер — пробел
 
--- Вставка из системного буфера
-vim.keymap.set({'n', 'i'}, '<C-v>', '"+p', { silent = true, desc = "Paste from system clipboard" })
-vim.keymap.set('i', '<C-v>', '<C-r>+', { silent = true, desc = "Paste from system clipboard" })
 
--- Копирование в системный буфер
-vim.keymap.set({'v', 'i'}, '<C-c>', '"+y', { silent = true, desc = "Copy selection to system clipboard" })
-vim.keymap.set('n', '<C-c>', '"+yy', { silent = true, desc = "Copy current line to system clipboard" })
+------------------------------------------------------------
+-- Общие настройки для всех биндов
+------------------------------------------------------------
+local map  = vim.keymap.set
+local opts = { silent = true, noremap = true }
 
-vim.keymap.set("n", "-", function()
-  local parent = vim.fn.expand("%:p:h")  -- путь к родительской папке текущего файла
-  require("oil").open_float(parent)       -- открываем float
-end, { desc = "Open parent directory in floating Oil" })
 
+------------------------------------------------------------
+-- Управление буферами
+------------------------------------------------------------
+map("n", "<leader>w", "<cmd>bdelete<CR>",    opts)  -- Закрыть текущий буфер
+map("n", "<leader>l", "<cmd>bnext<CR>",      opts)  -- Следующий буфер
+map("n", "<leader>h", "<cmd>bprevious<CR>", opts)  -- Предыдущий буфер
+
+
+------------------------------------------------------------
+-- Буферы по номеру (BufferLine)
+------------------------------------------------------------
 for i = 1, 9 do
-  vim.keymap.set(
+  map(
     "n",
     "<leader>" .. i,
     "<cmd>BufferLineGoToBuffer " .. i .. "<CR>",
-    { desc = "Go to buffer " .. i }
+    opts
   )
 end
+
+
+------------------------------------------------------------
+-- Работа с системным буфером обмена
+------------------------------------------------------------
+-------------
+-- Вставка --
+map({ "n", "i" }, "<C-v>", '"+p',   opts) -- Вставка из system clipboard
+map("i", "<C-v>", "<C-r>+", opts)         -- Вставка в insert-режиме
+-----------------
+-- Копирование --
+map({ "v", "i" }, "<C-c>", '"+y',  opts)  -- Копировать выделение
+map("n", "<C-c>", '"+yy', opts)           -- Копировать строку
+---------------
+-- Вырезание --
+map("n", "<C-x>", '"+dd', opts)           -- Вырезать строку
+map("v", "<C-x>", '"+d',  opts)           -- Вырезать выделение
+---------------------------------
+-- Удаление без записи в буфер --
+map("n", "dd", '"_dd', opts)              -- Удалить строку
+map("n", "x", '"_x', opts)                -- Удалить символ
+map("v", "d", '"_d', opts)                -- Удалить выделение
+
+
+------------------------------------------------------------
+-- Файловая навигация
+------------------------------------------------------------
+map("n", "-", function()
+  -- Открыть родительскую директорию текущего файла во floating-окне Oil
+  local parent = vim.fn.expand("%:p:h")
+  require("oil").open_float(parent)
+end, opts)
