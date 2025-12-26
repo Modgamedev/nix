@@ -7,7 +7,8 @@ function _G.toggle_floating_term()
     -- если терминал уже открыт в окне — закрываем это окно
     for _, win in ipairs(vim.api.nvim_list_wins()) do
       if vim.api.nvim_win_get_buf(win) == float_term_bufnr then
-        return vim.api.nvim_win_close(win, true)
+        vim.api.nvim_win_close(win, true)
+        return
       end
     end
   end
@@ -36,33 +37,27 @@ function _G.toggle_floating_term()
   -- открываем окно
   vim.api.nvim_open_win(float_term_bufnr, true, opts)
 
-  -- если терминал не запущен в этом буфере — запускаем shell
-  local ok, _ = pcall(vim.api.nvim_buf_get_var, float_term_bufnr, "terminal_job_id")
+  -- если терминал не запущен — запускаем shell
+  local ok = pcall(vim.api.nvim_buf_get_var, float_term_bufnr, "terminal_job_id")
   if not ok then
     vim.fn.termopen(vim.o.shell)
   end
 
-  -- автоматически сразу входим в вставку
   vim.cmd("startinsert")
 
-  -- привязка ESC только закрывает окно, не буфер
-  vim.api.nvim_buf_set_keymap(
-    float_term_bufnr, "t", "<Esc>",
-    [[<C-\><C-n>:close<CR>]],
-    { noremap = true, silent = true }
-  )
-  -- leader+t в терминале = закрыть окно (toggle)
-  vim.keymap.set(
-    "t",
-    "<leader>t",
-    [[<C-\><C-n>:close<CR>]],
-    { buffer = float_term_bufnr, silent = true }
-  )
+  -- общие opts для биндингов
+  local key_opts = { silent = true, buffer = float_term_bufnr }
+
+  -- ESC закрывает окно
+  vim.keymap.set("t", "<Esc>", [[<C-\><C-n>:close<CR>]], key_opts)
+
+  -- leader+t закрывает окно (toggle)
+  vim.keymap.set("t", "<leader>t", [[<C-\><C-n>:close<CR>]], key_opts)
 end
 
--- привязка горячей клавиши
-vim.api.nvim_set_keymap(
-  "n", "<leader>t",
-  "<cmd>lua toggle_floating_term()<CR>",
-  { noremap = true, silent = true }
-)
+-- opts для normal-mode биндинга
+local normal_opts = { silent = true }
+
+-- leader+t = toggle floating terminal
+vim.keymap.set("n", "<leader>t", toggle_floating_term, normal_opts)
+

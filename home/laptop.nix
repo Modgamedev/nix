@@ -16,6 +16,8 @@
     ./modules/dircolors.nix
     ./modules/udiskie.nix
     ./modules/mako.nix
+    ./modules/delta.nix
+    ./modules/bat.nix
     #./modules/swaylock.nix
   ];
 
