@@ -1,25 +1,42 @@
 { config, pkgs, lib, ... }:
-
+## На проверку
+let
+  oilLspDiagnostics = pkgs.vimUtils.buildVimPlugin {
+    pname = "oil-lsp-diagnostics.nvim";
+    version = "0.1.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "JezerM";
+      repo = "oil-lsp-diagnostics.nvim";
+      rev = "master";
+      sha256 = "oAoAQagOOwP4bJioGL8qC79oBWggldg2RivzTqgbYos=";
+    };
+    doCheck = false;
+  };
+in
 {
     home.packages = with pkgs; [
       wl-clipboard
+      ripgrep
     ];  
 
     programs.neovim = {
-    #######################
-    ### Общие настройки ###
-    #######################
-    enable = true;
-    defaultEditor = true;
+    ##########################
+    ### Основные настройки ###
+    ##########################
+    enable = true;                        ## Включаем neovim
+    defaultEditor = true;                 ## Редактор по умолчанию
 
-    #######################
-    ###     Плагины     ###
-    #######################
+    ##########################
+    ### Установка плагинов ###
+    ##########################
     plugins = with pkgs.vimPlugins; [
       lualine-nvim                        ## Строка статуса внизу
       indent-blankline-nvim               ## Вертикальные линии отступов (структура кода)
-      oil-nvim                            ## Файловый менеджер (как буферы)
-      oil-git-status-nvim
+      oil-nvim                            ## Файловый менеджер (буфферный)
+      oil-git-nvim                        ## Ототбражение git статуса в oil 
+      oilLspDiagnostics                   ## Ототбражение lsp инфо в oil (справа от файла)
+      noice-nvim                          ## Командная строка + уведомления
+      nvim-notify
       bufferline-nvim                     ## Вкладки буферов сверху
       tokyonight-nvim                     ## Цветовая тема (UI + синтаксис)
       langmapper-nvim
@@ -51,6 +68,7 @@
       ${builtins.readFile ./plugins_settings.lua}
       --     Плагины       --
       ${builtins.readFile ./plugins/oil.lua}          -- Файловый менеджер буфферный
+      ${builtins.readFile ./plugins/noice-nvim.lua}   -- Командная строка + уведомления
     '';
   };
 }
