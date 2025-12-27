@@ -19,6 +19,7 @@
       lualine-nvim                        ## Строка статуса внизу
       indent-blankline-nvim               ## Вертикальные линии отступов (структура кода)
       oil-nvim                            ## Файловый менеджер (как буферы)
+      oil-git-status-nvim
       bufferline-nvim                     ## Вкладки буферов сверху
       tokyonight-nvim                     ## Цветовая тема (UI + синтаксис)
       langmapper-nvim
